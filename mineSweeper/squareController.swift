@@ -77,7 +77,6 @@ class squareController {
         for sq in squareArr {
             if (sq.tagNo == tag) {
                 sqr = sq
-                sqr!.hit();
                 return sqr!
             }
             
@@ -107,7 +106,6 @@ class squareController {
     
     func squarePress(tag: Int) {
         var sq = find(tag)
-        self.isWone()
         self.unvisit()
         self.afterPressed(sq)
     }
@@ -142,6 +140,7 @@ class squareController {
         
         var action: String = sq.pressed(sum)
         sq.visit();
+        self.isWone()
         if action == "blank" {
             revealNeighbors(neighbors)
         }

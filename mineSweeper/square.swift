@@ -53,7 +53,7 @@ class square: pageElement {
     
     // Returns true if
     func pressed(numNeighborBombs: Int) -> String {
-        hit()
+        self.hit()
         if self.hasBomb {
             return "hit"
         } else if numNeighborBombs == 0 {
