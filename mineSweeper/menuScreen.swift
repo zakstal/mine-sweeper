@@ -132,4 +132,33 @@ class menuScreen: pageElement {
             self.view.frame = self.makeFrame(67, y: 1000, width: 247, height: 458)
         }, completion: nil)
     }
+    
+    
+    func setActiveDifficultyButton(title: String) {
+        self.resetButtonColor()
+        switch title.lowercaseString {
+            case "easy":
+                self.setActiveColor(self.easyButton!)
+            case "medium":
+                self.setActiveColor(self.medButton!)
+            case "hard":
+                self.setActiveColor(self.hardButton!)
+            default:
+                print("sorry not an option")
+        }
+    }
+
+    func resetButtonColor() {
+        self.setDefaultBackgroundColor(self.easyButton!)
+        self.setDefaultBackgroundColor(self.medButton!)
+        self.setDefaultBackgroundColor(self.hardButton!)
+    }
+    
+    func setActiveColor(button: UIButton) {
+        button.backgroundColor = UIColor(red: 0.3373, green: 0.5686, blue: 0.6275, alpha: 1.0)
+    }
+    
+    func setDefaultBackgroundColor(button: UIButton) {
+        button.backgroundColor = UIColor(red: 0.5765, green: 0, blue: 0.8667, alpha: 1.0)
+    }
 }

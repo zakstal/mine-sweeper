@@ -131,7 +131,12 @@ class square: pageElement {
     
     func flag() {
         self.flagged = self.flagged ? false : true
-        self.flagAnimation()
+        if self.flagged {
+            self.flagAnimation()
+        } else {
+            self.setDefault()
+        }
+
     }
     
     func flagAnimation() {
@@ -151,6 +156,11 @@ class square: pageElement {
             self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1)
             self.view.layer.zPosition = zIndex
         })
+
+    }
+    
+    func setDefault() {
+        self.view.backgroundColor =  UIColor(red: 0.9294, green: 0.5882, blue: 0, alpha: 1.0)
 
     }
     

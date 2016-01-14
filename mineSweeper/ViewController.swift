@@ -54,6 +54,7 @@ class ViewController: UIViewController {
     
     func showMenu(delay: Int) {
         self.menu = menuScreen(xPos: 65, yPos: -600, width: 247, height: 458, tagNo: 1)
+        self.menu!.setActiveDifficultyButton(self.squareCont!.difficulty!)
         view.addSubview(self.menu!.view)
         self.menu!.startButton!.addTarget(self, action: "startGame:", forControlEvents: .TouchUpInside)
         self.menu!.easyButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
@@ -75,14 +76,20 @@ class ViewController: UIViewController {
     
     func pressedSquare(sender: UIButton!) {
         self.squareCont!.squarePress(sender.tag)
-        
+        self.gameLost()
+        self.gameWon()
+    }
+    
+    func gameLost() {
         if self.squareCont!.gameLost {
             self.showMenu(2)
             squareCont!.disableSquares()
             self.menu!.changeInfoText("Sorry, you lost")
         }
-        
-        if self.squareCont!.gameWone {
+    }
+    
+    func gameWon() {
+        if self.squareCont!.gameWon {
             self.showMenu(1)
             squareCont!.disableSquares()
             self.menu!.changeInfoText("Yay! You won!")
@@ -92,6 +99,7 @@ class ViewController: UIViewController {
     func chooseDifficulty(sender: UIButton!) {
         sender.highlighted = true
         self.squareCont!.setDifficulty(sender.currentTitle!)
+        self.menu!.setActiveDifficultyButton(sender.currentTitle!)
     }
     
     func advanceTagNo() {

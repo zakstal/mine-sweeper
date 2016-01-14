@@ -23,7 +23,7 @@ class squareController {
     var startXPos: Double = 40
     var startYPos: Double = 40
     var gameLost: Bool = false
-    var gameWone: Bool = false
+    var gameWon: Bool = false
     var difficulty: String?
     
     typealias squareSC = square
@@ -115,7 +115,7 @@ class squareController {
         sq.flag()
     }
     
-    func isWone() -> Bool {
+    func isWon() -> Bool {
         var won: Bool = true
         for sq in squareArr {
             if sq.hasBomb && !sq.hidden {
@@ -129,7 +129,7 @@ class squareController {
         
         print("is won \(won)")
         
-        self.gameWone = won
+        self.gameWon = won
         
         return won
     }
@@ -140,7 +140,7 @@ class squareController {
         
         var action: String = sq.pressed(sum)
         sq.visit();
-        self.isWone()
+        self.isWon()
         if action == "blank" {
             revealNeighbors(neighbors)
         }
