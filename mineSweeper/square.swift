@@ -12,6 +12,7 @@ import UIKit
 class square: pageElement {
     var test: String = "hello"
     var button: UIButton?
+    var flagImage: UIImageView?
     var hidden = true
     var hasBomb = false
     var visited = false
@@ -163,15 +164,16 @@ class square: pageElement {
     func flag() {
         self.flagged = self.flagged ? false : true
         if self.flagged {
-//            self.flagAnimation()
+            self.flagAnimation()
+            var image: UIImage = UIImage(named: "flag.png")!
+            self.flagImage = UIImageView(image: image)
+            self.flagImage!.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
+            self.view.addSubview(self.flagImage!)
         } else {
-//            self.setDefault()
+            self.flagImage?.removeFromSuperview()
         }
         
-        var image: UIImage = UIImage(named: "flag.png")!
-        var bgImage = UIImageView(image: image)
-        bgImage.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
-        self.view.addSubview(bgImage)
+        
 
     }
     
@@ -181,7 +183,6 @@ class square: pageElement {
         UIView.animateWithDuration(0.3, animations: {
             // animating `transform` allows us to change 2D geometry of the object
             // like `scale`, `rotation` or `translate`
-            self.view.backgroundColor =  UIColor(red: 0.2353, green: 0, blue: 0.6784, alpha: 1.0)
             self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 4, 4)
             self.view.layer.zPosition = 10
         })

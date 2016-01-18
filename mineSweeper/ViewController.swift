@@ -72,7 +72,9 @@ class ViewController: UIViewController {
     }
     
     func handleLongPress(gesture: UILongPressGestureRecognizer) {
-        self.squareCont!.squareHeld(gesture.view!.tag)
+        if gesture.state == UIGestureRecognizerState.Began {
+            self.squareCont!.squareHeld(gesture.view!.tag)
+        }
     }
     
     func pressedSquare(sender: UIButton!) {
