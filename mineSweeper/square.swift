@@ -36,6 +36,7 @@ class square: pageElement {
     
     func hit() {
         self.show()
+        self.removeFlagImage()
         UIView.animateWithDuration(0.1, animations: {
             self.colorHit()
             self.hitText()
@@ -53,6 +54,7 @@ class square: pageElement {
             bgImage.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
             self.view.addSubview(bgImage)
             self.text("")
+            self.removeFlagImage()
         }
         
         self.button!.setTitleColor(UIColor.greenColor(), forState: .Normal)
@@ -161,6 +163,10 @@ class square: pageElement {
         })
     }
     
+    func removeFlagImage() {
+        self.flagImage?.removeFromSuperview()
+    }
+    
     func flag() {
         self.flagged = self.flagged ? false : true
         if self.flagged {
@@ -170,11 +176,8 @@ class square: pageElement {
             self.flagImage!.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
             self.view.addSubview(self.flagImage!)
         } else {
-            self.flagImage?.removeFromSuperview()
+            self.removeFlagImage()
         }
-        
-        
-
     }
     
     func flagAnimation() {
