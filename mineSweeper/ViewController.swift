@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         self.initSquareController()
         self.populate()
         self.squareCont!.disableSquares()
+        self.addMenuButton()
         self.showMenu(0)
     }
 
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
         self.advanceTagNo()
     }
     
-    func showMenu(delay: Int) {
+    func initMenu() {
         self.menu = menuScreen(xPos: 65, yPos: -600, width: 247, height: 458, tagNo: 1)
         self.menu!.setActiveDifficultyButton(self.squareCont!.difficulty!)
         view.addSubview(self.menu!.view)
@@ -60,10 +61,10 @@ class ViewController: UIViewController {
         self.menu!.easyButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
         self.menu!.medButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
         self.menu!.hardButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
-        self.menu!.showScreen(Double(delay))
     }
     
     func startGame(sender: UIButton!) {
+        print("start game")
         self.menu?.hideScreen()
         self.squareCont!.reset()
         self.resetTagNo()
@@ -109,5 +110,30 @@ class ViewController: UIViewController {
     func resetTagNo() {
         self.tagNo = 1
     }
+    
+    func showMenu(delay: Int) {
+        if (self.menu != nil) {
+            self.menu!.clearMenu()
+        }
+        
+        squareCont!.disableSquares()
+        self.initMenu();
+        self.menu!.showScreen(Double(delay))
+    }
+    
+    func showTheMenu(sender: AnyObject) {
+        self.showMenu(0)
+    }
+    
+    func addMenuButton() {
+        let button = UIButton()
+        view.addSubview(button)
+        button.setTitleColor(UIColor(red: 0.5765, green: 0, blue: 0.8667, alpha: 1.0), forState: .Normal)
+        button.setTitle("MENU", forState: .Normal)
+        button.frame = CGRectMake(15, 630, CGFloat(90), CGFloat(30))
+        button.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
+        button.addTarget(self, action: "showTheMenu:", forControlEvents: .TouchUpInside)
+    }
 }
+
 

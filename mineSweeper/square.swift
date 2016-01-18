@@ -46,7 +46,14 @@ class square: pageElement {
     }
     
     func hitText() {
-        text(self.hasBomb ? "B" : "O")
+        if (self.hasBomb) {
+            var image: UIImage = UIImage(named: "explosion.png")!
+            var bgImage = UIImageView(image: image)
+            bgImage.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
+            self.view.addSubview(bgImage)
+            self.text("")
+        }
+        
         self.button!.setTitleColor(UIColor.greenColor(), forState: .Normal)
     }
     
@@ -57,16 +64,40 @@ class square: pageElement {
         if self.hasBomb {
             return "hit"
         } else if numNeighborBombs == 0 {
-            text("")
+            self.text("")
             return "blank"
         } else {
-            text(String(numNeighborBombs))
+            self.text(String(numNeighborBombs))
+            self.setTextNumberColor(numNeighborBombs)
             return "not blank"
         }
     }
     
     func text(text: String) {
         self.button!.setTitle(text, forState: .Normal)
+    }
+    
+    func setTextNumberColor(num: Int) {
+        switch num {
+        case 1:
+            self.button!.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        case 2:
+            self.button!.setTitleColor(UIColor(red: 0.1882, green: 0, blue: 0.8196, alpha: 1.0), forState: .Normal)
+        case 3:
+            self.button!.setTitleColor(UIColor(red: 0, green: 0.5294, blue: 0.8392, alpha: 1.0), forState: .Normal)
+        case 4:
+            self.button!.setTitleColor(UIColor(red: 0.7882, green: 0.2353, blue: 0, alpha: 1.0), forState: .Normal)
+        case 5:
+            self.button!.setTitleColor(UIColor(red: 0.8588, green: 0.1137, blue: 0, alpha: 1.0), forState: .Normal)
+        case 6:
+            self.button!.setTitleColor(UIColor(red: 0.9294, green: 0.0275, blue: 0, alpha: 1.0), forState: .Normal)
+        case 7:
+            self.button!.setTitleColor(UIColor(red: 1, green: 0, blue: 0, alpha: 1.0), forState: .Normal)
+        default:
+            self.button!.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        }
+        
+        
     }
     
     func addBomb() {
@@ -132,10 +163,15 @@ class square: pageElement {
     func flag() {
         self.flagged = self.flagged ? false : true
         if self.flagged {
-            self.flagAnimation()
+//            self.flagAnimation()
         } else {
-            self.setDefault()
+//            self.setDefault()
         }
+        
+        var image: UIImage = UIImage(named: "flag.png")!
+        var bgImage = UIImageView(image: image)
+        bgImage.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
+        self.view.addSubview(bgImage)
 
     }
     

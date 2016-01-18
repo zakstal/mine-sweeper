@@ -16,6 +16,7 @@ class menuScreen: pageElement {
     var medButton: UIButton?
     var hardButton: UIButton?
     var textInfo: UITextField?
+    var isHidden = true
     
     
     override init(xPos: Double, yPos: Double, width: Double, height: Double, tagNo: Int) {
@@ -113,6 +114,8 @@ class menuScreen: pageElement {
     }
     
     func showScreen(delay: Double) {
+        self.isHidden = false
+        self.resetToStartPos()
         self.view.layer.zPosition = 11
         UIView.animateWithDuration(0.4, delay: delay, options: nil, animations: {
             self.view.frame = self.makeFrame(67, y: 150, width: 247, height: 458)
@@ -124,13 +127,19 @@ class menuScreen: pageElement {
     }
     
     func hideScreen() {
+        
         UIView.animateWithDuration(0.5, animations: {
             self.view.frame = self.makeFrame(67, y: 50, width: 247, height: 458)
         })
         
         UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
             self.view.frame = self.makeFrame(67, y: 1000, width: 247, height: 458)
+            self.isHidden = true
         }, completion: nil)
+    }
+    
+    func resetToStartPos() {
+        self.view.frame = self.makeFrame(67, y: -600, width: 247, height: 458)
     }
     
     
@@ -160,5 +169,9 @@ class menuScreen: pageElement {
     
     func setDefaultBackgroundColor(button: UIButton) {
         button.backgroundColor = UIColor(red: 0.5765, green: 0, blue: 0.8667, alpha: 1.0)
+    }
+    
+    func clearMenu() {
+        self.view.removeFromSuperview()
     }
 }

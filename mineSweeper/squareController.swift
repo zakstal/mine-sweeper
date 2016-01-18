@@ -110,6 +110,23 @@ class squareController {
         self.afterPressed(sq)
     }
     
+    func afterPressed(sq: square) {
+        var neighbors = getNeighbors(Double(sq.tagNo - 1))
+        var sum = neighborSum(neighbors)
+        
+        var action: String = sq.pressed(sum)
+        sq.visit();
+        self.isWon()
+        if action == "blank" {
+            revealNeighbors(neighbors)
+        }
+        
+        if action == "hit" {
+            revealBombs()
+            self.gameLost = true
+        }
+    }
+    
     func squareHeld(tag: Int) {
         var sq = find(tag)
         sq.flag()
@@ -132,23 +149,6 @@ class squareController {
         self.gameWon = won
         
         return won
-    }
-    
-    func afterPressed(sq: square) {
-        var neighbors = getNeighbors(Double(sq.tagNo - 1))
-        var sum = neighborSum(neighbors)
-        
-        var action: String = sq.pressed(sum)
-        sq.visit();
-        self.isWon()
-        if action == "blank" {
-            revealNeighbors(neighbors)
-        }
-        
-        if action == "hit" {
-            revealBombs()
-            self.gameLost = true
-        }
     }
     
     func revealNeighbors(neighbors: Array<square>) {
@@ -236,8 +236,7 @@ class squareController {
     
     func numberOfRows() -> Double {
         var width = getSquareWidth(Double(self.getNumberOfSquares()));
-        var useableHeight = getUsableHeight() - width
-        return useableHeight / width
+        return getUsableHeight() / (width + self.squarePadding)
     }
     
     func getUsableHeight() -> Double {
@@ -260,7 +259,7 @@ class squareController {
     
     func randAddBomb(square: squareSC) {
         var total = getTotalNumSquares()
-        var addBomb = Double(randomNumber(UInt32(total))) <= (total * 0.13333)
+        var addBomb = Double(randomNumber(UInt32(total))) <= (total * 0.23333)
         if addBomb {
             square.addBomb()
         }
