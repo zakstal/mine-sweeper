@@ -49,8 +49,8 @@ class square: pageElement {
     
     func hitText() {
         if (self.hasBomb) {
-            var image: UIImage = UIImage(named: "explosion.png")!
-            var bgImage = UIImageView(image: image)
+            let image: UIImage = UIImage(named: "explosion.png")!
+            let bgImage = UIImageView(image: image)
             bgImage.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
             self.view.addSubview(bgImage)
             self.text("")
@@ -128,7 +128,7 @@ class square: pageElement {
     }
     
     func exposion () {
-        UIView.animateWithDuration(0.3, delay: 0.3, options: nil, animations: {
+        UIView.animateWithDuration(0.3, delay: 0.3, options: [], animations: {
            self.view.backgroundColor =  UIColor(red: 0.9294, green: 0.5882, blue: 0, alpha: 1.0)
         }, completion: { (finished: Bool) -> Void in
                self.toRed()
@@ -136,7 +136,7 @@ class square: pageElement {
     }
     
     func toRed() {
-        UIView.animateWithDuration(1, delay: 0, options: nil, animations: {
+        UIView.animateWithDuration(1, delay: 0, options: [], animations: {
             self.colorHit()
         }, completion: {(finished: Bool) -> Void in
             self.exposion()
@@ -144,7 +144,7 @@ class square: pageElement {
     }
     
     func animate() {
-        var zIndex = self.view.layer.zPosition
+        let zIndex = self.view.layer.zPosition
         
         UIView.animateWithDuration(0.3, animations: {
             // animating `transform` allows us to change 2D geometry of the object
@@ -171,7 +171,7 @@ class square: pageElement {
         self.flagged = self.flagged ? false : true
         if self.flagged {
             self.flagAnimation()
-            var image: UIImage = UIImage(named: "flag.png")!
+            let image: UIImage = UIImage(named: "flag.png")!
             self.flagImage = UIImageView(image: image)
             self.flagImage!.frame = CGRectMake(5, 5, CGFloat(self.width - 10) , CGFloat(self.height - 10))
             self.view.addSubview(self.flagImage!)
@@ -181,7 +181,7 @@ class square: pageElement {
     }
     
     func flagAnimation() {
-        var zIndex = self.view.layer.zPosition
+        let zIndex = self.view.layer.zPosition
         
         UIView.animateWithDuration(0.3, animations: {
             // animating `transform` allows us to change 2D geometry of the object

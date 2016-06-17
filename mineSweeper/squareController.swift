@@ -80,7 +80,7 @@ class squareController {
                 return sqr!
             }
             
-            ++i
+            i += 1
         }
         
         return sqr!
@@ -105,16 +105,16 @@ class squareController {
     }
     
     func squarePress(tag: Int) {
-        var sq = find(tag)
+        let sq = find(tag)
         self.unvisit()
         self.afterPressed(sq)
     }
     
     func afterPressed(sq: square) {
-        var neighbors = getNeighbors(Double(sq.tagNo - 1))
-        var sum = neighborSum(neighbors)
+        let neighbors = getNeighbors(Double(sq.tagNo - 1))
+        let sum = neighborSum(neighbors)
         
-        var action: String = sq.pressed(sum)
+        let action: String = sq.pressed(sum)
         sq.visit();
         self.isWon()
         if action == "blank" {
@@ -128,7 +128,7 @@ class squareController {
     }
     
     func squareHeld(tag: Int) {
-        var sq = find(tag)
+        let sq = find(tag)
         sq.flag()
     }
     
@@ -144,7 +144,7 @@ class squareController {
             }
         }
         
-        print("is won \(won)")
+        print("is won \(won)", terminator: "")
         
         self.gameWon = won
         
@@ -186,8 +186,8 @@ class squareController {
     
     //TODO: find a better way tos get neighbors without all these arrays
     func getNeighborPoss(i: Double) -> Array<Array<Double>> {
-        var num = Double(self.getNumberOfSquares())
-        var neighbors: Array<Array<Double>> = [
+        let num = Double(self.getNumberOfSquares())
+        let neighbors: Array<Array<Double>> = [
             [i - num, -1], [i - num, 0], [i - num, 1],
             [i,       -1],               [i,       1],
             [i + num, -1], [i + num, 0], [i + num, 1]
@@ -198,26 +198,26 @@ class squareController {
     
     //TODO: add row ranges from squares so rowPos if == 5 can be variable for harder games
     func isNeighborOutOfRange(pos: Double, adjuster: Double) -> Bool {
-        var rowPos = pos % getNumberSqrPerRow()
-        var isOutOfRow = (rowPos == getNumberSqrPerRow() - 1 && adjuster == 1.0) || (rowPos == 0 && adjuster == -1.0)
-        var isOutOfArr = ( pos < 0.0 || pos > Double(squareArr.count - 1))
+        let rowPos = pos % getNumberSqrPerRow()
+        let isOutOfRow = (rowPos == getNumberSqrPerRow() - 1 && adjuster == 1.0) || (rowPos == 0 && adjuster == -1.0)
+        let isOutOfArr = ( pos < 0.0 || pos > Double(squareArr.count - 1))
         return isOutOfArr || isOutOfRow
     }
     
     func populate(funcParam: (xPos: Double, yPos: Double, width: Double, height: Double) -> ()) {
-        var sqWidth: Double = getSquareWidth(Double(self.getNumberOfSquares()))
-        var sqHeight: Double = sqWidth
+        let sqWidth: Double = getSquareWidth(Double(self.getNumberOfSquares()))
+        let sqHeight: Double = sqWidth
         var x: Double = 0
         var y: Double = 0
         var i: Double = 0
-        for row in 1...Int(getTotalNumSquares()) {
+        for _ in 1...Int(getTotalNumSquares()) {
             funcParam(xPos: Double(getXPos(x)), yPos: getYPos(y), width: sqWidth, height: sqHeight)
-            ++i
+            i += 1
             
             x = ++x % Double(self.getNumberOfSquares())
 
             if x == 0 {
-                ++y
+                y += 1
             }
         }
     }
@@ -235,7 +235,7 @@ class squareController {
     }
     
     func numberOfRows() -> Double {
-        var width = getSquareWidth(Double(self.getNumberOfSquares()));
+        let width = getSquareWidth(Double(self.getNumberOfSquares()));
         return getUsableHeight() / (width + self.squarePadding)
     }
     
@@ -258,8 +258,8 @@ class squareController {
     }
     
     func randAddBomb(square: squareSC) {
-        var total = getTotalNumSquares()
-        var addBomb = Double(randomNumber(UInt32(total))) <= (total * 0.23333)
+        let total = getTotalNumSquares()
+        let addBomb = Double(randomNumber(UInt32(total))) <= (total * 0.23333)
         if addBomb {
             square.addBomb()
         }

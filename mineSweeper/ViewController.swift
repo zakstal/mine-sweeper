@@ -44,10 +44,10 @@ class ViewController: UIViewController {
     }
     
     func makeSquare(xPos: Double, yPos: Double, width: Double, height: Double) {
-        var sqr = square(xPos: xPos, yPos: yPos, width: width, height: height, tagNo: tagNo)
+        let sqr = square(xPos: xPos, yPos: yPos, width: width, height: height, tagNo: tagNo)
         squareCont!.addSquare(sqr)
-        sqr.button!.addTarget(self, action: "pressedSquare:", forControlEvents: .TouchUpInside)
-        sqr.button!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "handleLongPress:"))
+        sqr.button!.addTarget(self, action: #selector(ViewController.pressedSquare(_:)), forControlEvents: .TouchUpInside)
+        sqr.button!.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(ViewController.handleLongPress(_:))))
         
         self.view.addSubview(sqr.view)
         self.advanceTagNo()
@@ -57,14 +57,14 @@ class ViewController: UIViewController {
         self.menu = menuScreen(xPos: 65, yPos: -600, width: 247, height: 458, tagNo: 1)
         self.menu!.setActiveDifficultyButton(self.squareCont!.difficulty!)
         view.addSubview(self.menu!.view)
-        self.menu!.startButton!.addTarget(self, action: "startGame:", forControlEvents: .TouchUpInside)
-        self.menu!.easyButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
-        self.menu!.medButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
-        self.menu!.hardButton!.addTarget(self, action: "chooseDifficulty:", forControlEvents: .TouchUpInside)
+        self.menu!.startButton!.addTarget(self, action: #selector(ViewController.startGame(_:)), forControlEvents: .TouchUpInside)
+        self.menu!.easyButton!.addTarget(self, action: #selector(ViewController.chooseDifficulty(_:)), forControlEvents: .TouchUpInside)
+        self.menu!.medButton!.addTarget(self, action: #selector(ViewController.chooseDifficulty(_:)), forControlEvents: .TouchUpInside)
+        self.menu!.hardButton!.addTarget(self, action: #selector(ViewController.chooseDifficulty(_:)), forControlEvents: .TouchUpInside)
     }
     
     func startGame(sender: UIButton!) {
-        print("start game")
+        print("start game", terminator: "")
         self.menu?.hideScreen()
         self.squareCont!.reset()
         self.resetTagNo()
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     }
     
     func advanceTagNo() {
-        ++self.tagNo
+        self.tagNo += 1
     }
     
     func resetTagNo() {
@@ -134,7 +134,7 @@ class ViewController: UIViewController {
         button.setTitle("MENU", forState: .Normal)
         button.frame = CGRectMake(15, 630, CGFloat(90), CGFloat(30))
         button.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
-        button.addTarget(self, action: "showTheMenu:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(ViewController.showTheMenu(_:)), forControlEvents: .TouchUpInside)
     }
 }
 

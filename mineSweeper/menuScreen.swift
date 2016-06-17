@@ -42,7 +42,7 @@ class menuScreen: pageElement {
     }
     
     func addStartButton() {
-        var button = makeButton()
+        let button = makeButton()
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.setTitle("START", forState: .Normal)
         button.frame = CGRectMake(25, 350, CGFloat(200), CGFloat(80))
@@ -53,25 +53,25 @@ class menuScreen: pageElement {
     }
     
     func addEasyButton() {
-        var button = makeChallengeButton("Easy")
+        let button = makeChallengeButton("Easy")
         button.frame = CGRectMake(50, 210, CGFloat(150), CGFloat(30))
         self.easyButton = button
     }
     
     func addMedButton() {
-        var button = makeChallengeButton("Medium")
+        let button = makeChallengeButton("Medium")
         button.frame = CGRectMake(50, 250, CGFloat(150), CGFloat(30))
         self.medButton = button
     }
     
     func addHardButton() {
-        var button = makeChallengeButton("Hard")
+        let button = makeChallengeButton("Hard")
         button.frame = CGRectMake(50, 290, CGFloat(150), CGFloat(30))
         self.hardButton = button
     }
     
     func makeChallengeButton(difficulty: String) -> UIButton {
-        var button = makeButton()
+        let button = makeButton()
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.setTitle(difficulty, forState: .Normal)
         button.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 15)
@@ -117,29 +117,29 @@ class menuScreen: pageElement {
         self.isHidden = false
         self.resetToStartPos()
         self.view.layer.zPosition = 11
-        UIView.animateWithDuration(0.4, delay: delay, options: nil, animations: {
-            self.view.frame = self.makeFrame(67, y: 150, width: 247, height: 458)
+        UIView.animateWithDuration(0.4, delay: delay, options: [], animations: {
+            self.view.frame = self.makeFrame(84, y: 150, width: 247, height: 458)
          }, completion: nil)
         
-        UIView.animateWithDuration(0.3, delay: delay + 0.4, options: nil, animations: {
-            self.view.frame = self.makeFrame(67, y: 102, width: 247, height: 458)
+        UIView.animateWithDuration(0.3, delay: delay + 0.4, options: [], animations: {
+            self.view.frame = self.makeFrame(84, y: 102, width: 247, height: 458)
          }, completion: nil)
     }
     
     func hideScreen() {
         
         UIView.animateWithDuration(0.5, animations: {
-            self.view.frame = self.makeFrame(67, y: 50, width: 247, height: 458)
+            self.view.frame = self.makeFrame(84, y: 50, width: 247, height: 458)
         })
         
-        UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
-            self.view.frame = self.makeFrame(67, y: 1000, width: 247, height: 458)
+        UIView.animateWithDuration(0.5, delay: 0.5, options: [], animations: {
+            self.view.frame = self.makeFrame(84, y: 1000, width: 247, height: 458)
             self.isHidden = true
         }, completion: nil)
     }
     
     func resetToStartPos() {
-        self.view.frame = self.makeFrame(67, y: -600, width: 247, height: 458)
+        self.view.frame = self.makeFrame(84, y: -600, width: 247, height: 458)
     }
     
     
@@ -153,7 +153,7 @@ class menuScreen: pageElement {
             case "hard":
                 self.setActiveColor(self.hardButton!)
             default:
-                print("sorry not an option")
+                print("sorry not an option", terminator: "")
         }
     }
 
